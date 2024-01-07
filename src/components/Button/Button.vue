@@ -23,4 +23,10 @@ defineProps<Props>()
   cursor: pointer;
   font-size: 14px;
 }
+
+.active {
+  background-color: #81C784;
+  border: #43A047;
+  color: #fff
+}
 </style>
