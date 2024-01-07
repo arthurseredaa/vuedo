@@ -1,23 +1,10 @@
 import {defineStore} from "pinia";
-
-type Todo = {
-  id: number;
-  text: string;
-  done: boolean;
-}
-
-type State = {
-  todos: Todo[];
-  currentFilter: 'all' | 'done' | 'todo';
-  nextId: number;
-  newTodoText: string;
-}
+import type {State, Todo} from "@/types/common";
 
 export const useTodosStore = defineStore('todos', {
   state: (): State => ({
     todos: [],
-    currentFilter: 'all',
-    nextId: 0,
+    currentFilter: 'todo',
     newTodoText: '',
   }),
   getters: {
@@ -40,14 +27,14 @@ export const useTodosStore = defineStore('todos', {
   actions: {
     add(text: string) {
       this.todos.push({
-        id: this.nextId,
+        id: crypto.randomUUID(),
         text,
         done: false,
       });
-      this.nextId++;
+
       this.newTodoText = '';
     },
-    toggle(todoId: number) {
+    toggle(todoId: string) {
       this.todos = this.todos.map((todo) => todo.id === todoId ? {...todo, done: !todo.done} : todo)
     },
     remove(todo: Todo) {
