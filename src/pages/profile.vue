@@ -11,10 +11,11 @@
 <script setup lang="ts">
 import {useTodosStore} from "@/store/todos";
 import {storeToRefs} from "pinia";
+import {computed} from "vue";
 
 const todosStore = useTodosStore()
 const {todos} = storeToRefs(todosStore)
-const completedTodos = todos.value.filter(todo => todo.done)
+const completedTodos = computed(() => todos.value.filter(todo => todo.done))
 </script>
 
 <style scoped lang="scss">
